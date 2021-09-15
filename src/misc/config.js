@@ -6,10 +6,3 @@ export const apiGet = async (queryString) => {
 	);
 	return response;
 };
-
-// fetch(`https://api.tvmaze.com/search/shows?q=${input}`)
-// .then((r) => r.json())
-// .then((result) => {
-//     setResults(result);
-//     // console.log(result);
-// });
