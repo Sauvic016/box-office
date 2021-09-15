@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import ActorGrid from "../actor/ActorGrid";
 import MainPageLayout from "../components/MainPageLayout";
 import { apiGet } from "../misc/config";
+import ShowGrid from "../show/ShowGrid";
 
 const Home = () => {
 	const [input, setInput] = useState("");
@@ -19,6 +21,7 @@ const Home = () => {
 			setResults(result);
 		});
 	};
+	// console.log(results);
 	const onKeydown = (ev) => {
 		if (ev.keyCode === 13) {
 			onSearch();
@@ -30,13 +33,11 @@ const Home = () => {
 			return <div>No results</div>;
 		}
 		if (results && results.length > 0) {
-			return results[0].show
-				? results.map((el) => (
-						<div key={el.show.id}>{el.show.name}</div>
-				  ))
-				: results.map((el) => (
-						<div key={el.person.id}>{el.person.name}</div>
-				  ));
+			return results[0].show ? (
+				<ShowGrid data={results} />
+			) : (
+				<ActorGrid data={results} />
+			);
 		}
 
 		return null;
@@ -45,7 +46,7 @@ const Home = () => {
 	const onRadioChange = (ev) => {
 		setSearchOption(ev.target.value);
 	};
-	console.log(searchOption);
+	// console.log(searchOption);
 
 	return (
 		<MainPageLayout>
